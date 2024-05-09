@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback Form</title>
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<div data-role="page" id="feedback-page">
+  <div data-role="header">
+    <h1>Feedback Form</h1>
+  </div>
+
+  <div role="main" class="ui-content">
+    <form id="feedback-form">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name">
+
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email">
+
+      <label for="address">Address:</label>
+      <input type="text" name="address" id="address">
+
+      <label for="comments">Comments:</label>
+      <textarea name="comments" id="comments"></textarea>
+
+      <!-- <label for="improvement">Any Improvement?</label>
+      <select name="improvement" id="improvement" data-role="flipswitch">
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+      </select>
+
+      <div id="improvement-details" style="display: none;">
+        <label for="improvement-text">Details:</label>
+        <input type="text" name="improvement-text" id="improvement-text">
+      </div> -->
+
+      <label for="display-response">Display Response?</label>
+      <select name="display-response" id="display-response" data-role="flipswitch">
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+      </select>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <div id="feedback-response" style="display: none;">
+      <h2>Your Feedback:</h2>
+      <div id="response-details"></div>
+    </div>
+  </div>
+</div>
+
+<script src="jquery.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+$(document).ready(function(){
+    // $('#improvement').on('change', function(){
+    //   if ($(this).val() === 'yes') {
+    //     $('#improvement-details').show();
+    //   } else {
+    //     $('#improvement-details').hide();
+    //   }
+    // });
+  
+    $('#feedback-form').submit(function(event){
+      event.preventDefault();
+  
+      var formData = {
+        name: $('#name').val(),
+        email: $('#email').val(),
+        address: $('#address').val(),
+        comments: $('#comments').val(),
+        // improvement: $('#improvement').val(),
+        // improvementText: $('#improvement-text').val(),
+        displayResponse: $('#display-response').val()
+      };
+  
+      $('#response-details').html('');
+      $.each(formData, function(key, value){
+        $('#response-details').append('<p><strong>' + key + ':</strong> ' + value + '</p>');
+      });
+  
+      if (formData.displayResponse === 'yes') {
+        $('#feedback-response').show();
+      } else {
+        $('#feedback-response').hide();
+      }
+    });
+  });
+  
+
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .ui-content {
+    padding: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  #improvement-details {
+    margin-top: 10px;
+  }
+  
+  #feedback-response {
+    margin-top: 20px;
+  }
+  
+  #response-details {
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+
+

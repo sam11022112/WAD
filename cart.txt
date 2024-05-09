@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>E-commerce Store</title>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="script.js"></script>
+</head>
+<body>
+
+<div data-role="page" id="home">
+    <div data-role="header">
+        <h1>E-commerce Store</h1>
+        <a href="#cart" class="ui-btn-right" data-icon="shop" data-iconpos="notext">Cart</a>
+    </div>
+
+    <div data-role="content">
+        <ul data-role="listview" id="itemList">
+            <li>
+                <img src="item1.jpg" alt="Item 1">
+                <h2>Item 1</h2>
+                <p>$10</p>
+                <a href="#" class="add-to-cart" data-name="Item 1" data-price="10">Add to Cart</a>
+            </li>
+            <li>
+                <img src="item2.jpg" alt="Item 2">
+                <h2>Item 2</h2>
+                <p>$15</p>
+                <a href="#" class="add-to-cart" data-name="Item 2" data-price="15">Add to Cart</a>
+            </li>
+            <!-- Add more items here -->
+        </ul>
+    </div>
+</div>
+
+<div data-role="page" id="cart">
+    <div data-role="header">
+        <h1>Shopping Cart</h1>
+        <a href="#home" class="ui-btn-right" data-icon="home">Home</a>
+    </div>
+
+    <div data-role="content">
+        <ul data-role="listview" id="cartItems">
+            <!-- Cart items will be displayed here -->
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+// $(document).on("pagecreate", "#home", function () {
+//     $(".add-to-cart").click(function (event) {
+//         event.preventDefault();
+//         var itemName = $(this).data("name");
+//         var itemPrice = $(this).data("price");
+//         addToCart(itemName, itemPrice);
+//     });
+// });
+
+// function addToCart(name, price) {
+//     var $cartItems = $("#cartItems");
+//     var $existingItem = $cartItems.find("[data-name='" + name + "']");
+
+//     if ($existingItem.length > 0) {
+//         // If item already exists in cart, display alert message
+//         alert("Product is already present in the cart.");
+//     } else {
+//         $cartItems.append(
+//             "<li data-name='" + name + "' data-price='" + price + "' data-quantity='1'>" +
+//             "<h2>" + name + "</h2>" +
+//             "<p>Price: $" + price + "</p>" +
+//             "<p>Quantity: <span class='item-quantity'>1</span></p>" +
+//             "<a href='#' class='remove-from-cart' data-name='" + name + "'>Remove</a>" +
+//             "</li>"
+//         ).listview("refresh");
+//     }
+// }
+
+// $(document).on("pagecreate", "#cart", function () {
+//     $(document).on("click", ".remove-from-cart", function (event) {
+//         event.preventDefault();
+//         var itemName = $(this).data("name");
+//         removeFromCart(itemName);
+//     });
+// });
+
+// function removeFromCart(name) {
+//     var $cartItems = $("#cartItems");
+//     var $itemToRemove = $cartItems.find("[data-name='" + name + "']");
+
+//     $itemToRemove.remove();
+//     $cartItems.listview("refresh");
+// }
+$(document).on("pagecreate", "#home", function () {
+    $(".add-to-cart").click(function (event) {
+        event.preventDefault();
+        var itemName = $(this).data("name");
+        var itemPrice = $(this).data("price");
+        addToCart(itemName, itemPrice);
+    });
+});
+
+function addToCart(name, price) {
+    var $cartItems = $("#cartItems");
+    var $existingItem = $cartItems.find("[data-name='" + name + "']");
+
+    if ($existingItem.length > 0) {
+        // If item already exists in cart, display alert message
+        alert("Product is already present in the cart.");
+    } else {
+        $cartItems.append(
+            "<li data-name='" + name + "' data-price='" + price + "' data-quantity='1'>" +
+            "<h2>" + name + "</h2>" +
+            "<p>Price: $" + price + "</p>" +
+            "<p>Quantity: <span class='item-quantity'>1</span></p>" +
+            "</li>"
+        ).listview("refresh");
+    }
+}
+
+
+
+
+
+
+
+

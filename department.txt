@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Department Info</title>
+    <!-- <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"> -->
+    <link rel="stylesheet" href="style.css">
+    <!-- <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> -->
+    <!-- //link from the specified website -->
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="script.js"></script>
+</head>
+<body>
+
+<div data-role="page" id="home">
+    <div data-role="header">
+        <h1>Department List</h1>
+    </div>
+
+    <div data-role="content">
+        <div class="department-container">
+            <div class="department-item">
+                <a href="#department1" class="department-button">Department 1</a>
+                <p class="department-name">Department 1 Info</p>
+            </div>
+            <div class="department-item">
+                <a href="#department2" class="department-button">Department 2</a>
+                <p class="department-name">Department 2 Info</p>
+            </div>
+            <div class="department-item">
+                <a href="#department3" class="department-button">Department 3</a>
+                <p class="department-name">Department 3 Info</p>
+            </div>
+            <div class="department-item">
+                <a href="#department4" class="department-button">Department 4</a>
+                <p class="department-name">Department 4 Info</p>
+            </div>
+            <div class="department-item">
+                <a href="#department5" class="department-button">Department 5</a>
+                <p class="department-name">Department 5 Info</p>
+            </div>
+            <!-- Add more department items here -->
+        </div>
+    </div>
+</div>
+
+<!-- Department pages -->
+<div data-role="page" id="department1">
+    <div data-role="header">
+        <h1>Department 1 Info</h1>
+        <a href="#home" class="ui-btn-right" data-icon="home">Home</a>
+    </div>
+    <div data-role="content">
+        <p>Department 1 information goes here.</p>
+    </div>
+</div>
+
+<div data-role="page" id="department2">
+    <div data-role="header">
+        <h1>Department 2 Info</h1>
+        <a href="#home" class="ui-btn-right" data-icon="home">Home</a>
+    </div>
+    <div data-role="content">
+        <p>Department 2 information goes here.</p>
+    </div>
+</div>
+
+<div data-role="page" id="department3">
+    <div data-role="header">
+        <h1>Department 3 Info</h1>
+        <a href="#home" class="ui-btn-right" data-icon="home">Home</a>
+    </div>
+    <div data-role="content">
+        <p>Department 3 information goes here.</p>
+    </div>
+</div>
+
+<div data-role="page" id="department4">
+    <div data-role="header">
+        <h1>Department 4 Info</h1>
+        <a href="#home" class="ui-btn-right" data-icon="home">Home</a>
+    </div>
+    <div data-role="content">
+        <p>Department 4 information goes here.</p>
+    </div>
+</div>
+
+<div data-role="page" id="department5">
+    <div data-role="header">
+        <h1>Department 5 Info</h1>
+        <a href="#home" class="ui-btn-right" data-icon="home">Home</a>
+    </div>
+    <div data-role="content">
+        <p>Department 5 information goes here.</p>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+$(document).on("pagecreate", "#home", function () {
+    $(".department-button").click(function (event) {
+        event.preventDefault();
+        var departmentId = $(this).attr("href");
+        $.mobile.changePage(departmentId);
+    });
+});
+
+
+
+.department-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.department-item {
+    width: 20%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.department-button {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.department-name {
+    margin: 0;
+}
+
+

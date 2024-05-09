@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Display Local File Contents</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <p class="content">AJAX is a developer's dream, because you can:</p>
+        <ul class="content" id="moreContent" style="display: none;">
+            <li>Update a web page without reloading the page</li>
+            <li>Request data from a server - after the page has loaded</li>
+            <li>Receive data from a server - after the page has loaded</li>
+            <li>Send data to a server - in the background</li>
+        </ul>
+        <div id="fileContent"></div>
+        <button id="loadFileButton">Show More About AJAX</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+var isContentVisible = false;
+var originalContent = "";
+
+document.getElementById("loadFileButton").addEventListener("click", function() {
+    if (!isContentVisible) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                originalContent = document.getElementById("fileContent").innerText;
+                document.getElementById("fileContent").innerText = this.responseText;
+                document.getElementById("loadFileButton").innerText = "Show Less";
+                isContentVisible = true;
+            }
+        };
+        xhttp.open("GET", "localfile.txt", true);
+        xhttp.send();
+    } else {
+        document.getElementById("fileContent").innerText = originalContent;
+        document.getElementById("loadFileButton").innerText = "Show More";
+        isContentVisible = false;
+    }
+});
+
+
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f2f2f2;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.content {
+    text-align: left;
+    color: #333;
+}
+
+button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

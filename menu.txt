@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Restaurant Menu</title>
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<div data-role="page" id="home">
+  <div data-role="header">
+    <h1>Restaurant Menu</h1>
+  </div>
+  <div data-role="content">
+    <ul data-role="listview" data-inset="true">
+      <li><a href="#menuPage" data-menu-id="1">Menu 1</a></li>
+      <li><a href="#menuPage" data-menu-id="2">Menu 2</a></li>
+      <li><a href="#menuPage" data-menu-id="3">Menu 3</a></li>
+    </ul>
+  </div>
+</div>
+
+<div data-role="page" id="menuPage">
+  <div data-role="header">
+    <a href="#home" class="ui-btn-left" data-icon="home">Home</a>
+    <h1>Menu</h1>
+  </div>
+  <div data-role="content" id="menuDescription">
+    <!-- Menu description will be dynamically loaded here -->
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+
+
+$(document).on("pagecreate", "#home", function () {
+    // Dummy menu data (replace with your actual menu items)
+    var menuItems = [
+      { id: 1, name: "Menu 1", description: "Description of Menu 1", price: "$10", image: "item1.jpg" },
+      { id: 2, name: "Menu 2", description: "Description of Menu 2", price: "$12", image: "item2.jpg" },
+      { id: 3, name: "Menu 3", description: "Description of Menu 3", price: "$15", image: "item3.jpg" }
+    ];
+  
+    var $menuPage = $("#menuPage");
+    var $menuDescription = $("#menuDescription");
+  
+    // Function to populate menu items
+    function populateMenu(menuId) {
+      $menuDescription.empty();
+      var menuItem = menuItems.find(item => item.id == menuId);
+      if (menuItem) {
+        var $menuDetails = $("<div>").addClass("menu-details");
+        $menuDetails.append($("<h2>").text(menuItem.name));
+        $menuDetails.append($("<p>").text(menuItem.description));
+        $menuDetails.append($("<p>").text("Price: " + menuItem.price));
+        $menuDetails.append($("<img>").attr("src", "images/" + menuItem.image).addClass("menu-image"));
+        $menuDescription.append($menuDetails).trigger("create");
+      }
+    }
+  
+    // Load menu details when menu page is shown
+    $menuPage.on("pagebeforeshow", function (event, ui) {
+      var menuId = ui.prevPage.find("a.ui-btn-active").data("menu-id");
+      populateMenu(menuId);
+    });
+  });
+  
+
+
+
+
+/* Add your custom styles here */
+.menu-item {
+    margin-bottom: 20px;
+  }
+  .menu-item img {
+    max-width: 100%;
+  }
+  
+
